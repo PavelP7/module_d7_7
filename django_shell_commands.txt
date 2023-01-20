@@ -1,0 +1,17 @@
+from news.models import *
+
+user1 = User.objects.create_user('Иван Иванов')
+user2 = User.objects.create_user('Петр Петров')
+
+author1 = Author.objects.create(user=user1)
+author2 = Author.objects.create(user=user2)
+
+for n in range(100):
+    article_text = ''
+    article_title = "Статья " + f'{n}'
+    for m in range(40):
+        article_text += f'{n}'
+    if n < 50:
+        Post.objects.create(author=author1, type=Post.article, title=article_title, text=article_text)
+    else:
+        Post.objects.create(author=author2, type=Post.article, title=article_title, text=article_text)
